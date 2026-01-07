@@ -35,8 +35,8 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {open && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur flex flex-col items-center justify-center gap-8 text-xl">
-          <button onClick={() => setOpen(false)} className="absolute top-6 right-6">
+        <div className="fixed inset-0 bg-cyan/80 backdrop-blur flex flex-col items-center justify-center gap-8 text-xl">
+          <button onClick={() => setOpen(false)} className="absolute top-4 right-6">
   <FaXmark size={26} />
 </button>
           <a href="#projects" onClick={() => setOpen(false)}>Projects</a>
