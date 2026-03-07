@@ -1,5 +1,5 @@
-import breaktracker from "../assets/projects/breaktracker.png";
-import ramadhan from "../assets/projects/ramadhan.png";
+import breaktracker from "./breaktracker.png";
+import ramadhan from "./ramadhan.png";
 
 export const projects = [
   {
