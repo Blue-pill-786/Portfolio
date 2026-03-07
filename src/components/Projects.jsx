@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function Projects() {
   return (
-    <section className="py-32 max-w-7xl mx-auto px-6">
+    <section id="projects" className="py-32 max-w-7xl mx-auto px-6">
       <h2 className="text-5xl font-extrabold mb-16">
         Selected Work
       </h2>
