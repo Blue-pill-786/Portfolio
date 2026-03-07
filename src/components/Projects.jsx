@@ -9,7 +9,7 @@ export default function Projects() {
       </h2>
 
       <div className="space-y-20">
-        {projects.map((p, i) => (
+        {projects.map((p) => (
           <motion.div
             key={p.title}
             initial={{ opacity: 0, y: 60 }}
@@ -17,11 +17,8 @@ export default function Projects() {
             transition={{ duration: 0.8 }}
             className="grid md:grid-cols-2 gap-12 items-center"
           >
-
             <div>
-              <h3 className="text-3xl font-bold">
-                {p.title}
-              </h3>
+              <h3 className="text-3xl font-bold">{p.title}</h3>
 
               <p className="mt-4 text-gray-400">
                 {p.description}
@@ -41,13 +38,18 @@ export default function Projects() {
               </a>
             </div>
 
-
-            <div className="glass h-64 flex items-center justify-center hover:scale-[1.03] transition">
-              <span className="text-gray-500">
-                Project Preview
-              </span>
-            </div>
-
+            <a
+              href={p.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="glass overflow-hidden rounded-xl hover:scale-[1.03] transition"
+            >
+              <img
+                src={p.image}
+                alt={p.title}
+                className="w-full h-64 object-cover"
+              />
+            </a>
           </motion.div>
         ))}
       </div>
