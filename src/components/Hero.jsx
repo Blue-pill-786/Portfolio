@@ -32,7 +32,7 @@ export default function Hero() {
           </p>
 
           <div className="mt-10 flex gap-6">
-            <a className="px-8 py-4 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-600 font-semibold hover:scale-105 transition">
+            <a className="px-8 py-4 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-600 font-semibold hover:scale-105 transition" href="#projects">
               View Work
             </a>
             <a className="px-8 py-4 rounded-2xl border border-white/20 hover:bg-white/5 transition">
