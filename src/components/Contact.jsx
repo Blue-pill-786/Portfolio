@@ -8,14 +8,41 @@ import {
 import { motion } from "framer-motion";
 import { useState } from "react";
 
+function ContactCard({ href, icon, label, onClick }) {
+  return (
+    <a
+      href={href}
+      onClick={onClick}
+      target="_blank"
+      rel="noreferrer"
+      className="group flex items-center gap-4 px-6 py-4 rounded-2xl
+      border border-white/15 bg-white/5 hover:bg-white/10
+      hover:shadow-[0_0_20px_rgba(99,102,241,0.2)]
+      transition"
+    >
+      {icon}
+      <span className="text-gray-200 font-medium">{label}</span>
+    </a>
+  );
+}
+
 export default function Contact() {
   const email = "ubairwani@gmail.com";
   const [copied, setCopied] = useState(false);
 
   const copyEmail = async () => {
-    await navigator.clipboard.writeText(email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    try {
+      await navigator.clipboard.writeText(email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      window.location.href = `mailto:${email}`;
+    }
+  };
+
+  const handleEmailClick = () => {
+    copyEmail();
+    window.location.href = `mailto:${email}?subject=Hello%20Ubair&body=Hi%20Ubair,%0D%0AI%20visited%20your%20portfolio%20and%20would%20like%20to%20connect.`;
   };
 
   return (
@@ -23,6 +50,7 @@ export default function Contact() {
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
         transition={{ duration: 0.7, ease: "easeOut" }}
         className="glass p-12 md:p-16"
       >
@@ -36,61 +64,51 @@ export default function Contact() {
 
         <div className="grid sm:grid-cols-2 gap-6">
           
-          {/* Email (copy) */}
+          {/* Email */}
           <button
-  onClick={() => {
-    copyEmail();
-    window.location.href = `mailto:${email}?subject=Hello%20Ubair&body=Hi%20Ubair,%0D%0AI%20visited%20your%20portfolio%20and%20would%20like%20to%20connect.`;
-  }}
-  className="group flex items-center gap-4 px-6 py-4 rounded-2xl
-             border border-white/15 bg-white/5 hover:bg-white/10 transition"
->
-  {copied ? (
-    <FaCheck className="text-xl text-green-400" />
-  ) : (
-    <FaEnvelope className="text-xl text-indigo-400 group-hover:scale-110 transition" />
-  )}
+            onClick={handleEmailClick}
+            className="group flex items-center gap-4 px-6 py-4 rounded-2xl
+            border border-white/15 bg-white/5 hover:bg-white/10
+            hover:shadow-[0_0_20px_rgba(99,102,241,0.2)]
+            transition"
+          >
+            {copied ? (
+              <FaCheck className="text-xl text-green-400" />
+            ) : (
+              <FaEnvelope className="text-xl text-indigo-400 group-hover:scale-110 transition" />
+            )}
 
-  <span className="text-gray-200 font-medium">
-    {copied ? "Email copied & opening mail…" : "Email me"}
-  </span>
-</button>
+            <span className="text-gray-200 font-medium">
+              {copied ? "Email copied! Opening mail…" : "Email me"}
+            </span>
+          </button>
 
           {/* WhatsApp */}
-          <a
-  href="https://wa.me/918800104011?text=Hi%20Ubair%2C%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20connect."
-  target="_blank"
-  rel="noreferrer"
-  className="group flex items-center gap-4 px-6 py-4 rounded-2xl
-             border border-white/15 bg-white/5 hover:bg-white/10 transition"
->
-            <FaWhatsapp className="text-xl text-green-400 group-hover:scale-110 transition" />
-            <span className="text-gray-200">WhatsApp</span>
-          </a>
+          <ContactCard
+            href="https://wa.me/918800104011?text=Hi%20Ubair%2C%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20connect."
+            icon={
+              <FaWhatsapp className="text-xl text-green-400 group-hover:scale-110 transition" />
+            }
+            label="WhatsApp"
+          />
 
           {/* GitHub */}
-          <a
+          <ContactCard
             href="https://github.com/Blue-pill-786"
-            target="_blank"
-            rel="noreferrer"
-            className="group flex items-center gap-4 px-6 py-4 rounded-2xl
-                       border border-white/15 bg-white/5 hover:bg-white/10 transition"
-          >
-            <FaGithub className="text-xl text-indigo-400 group-hover:scale-110 transition" />
-            <span className="text-gray-200">GitHub</span>
-          </a>
+            icon={
+              <FaGithub className="text-xl text-indigo-400 group-hover:scale-110 transition" />
+            }
+            label="GitHub"
+          />
 
           {/* LinkedIn */}
-          <a
+          <ContactCard
             href="https://www.linkedin.com/in/ubairwani/"
-            target="_blank"
-            rel="noreferrer"
-            className="group flex items-center gap-4 px-6 py-4 rounded-2xl
-                       border border-white/15 bg-white/5 hover:bg-white/10 transition"
-          >
-            <FaLinkedin className="text-xl text-indigo-400 group-hover:scale-110 transition" />
-            <span className="text-gray-200">LinkedIn</span>
-          </a>
+            icon={
+              <FaLinkedin className="text-xl text-indigo-400 group-hover:scale-110 transition" />
+            }
+            label="LinkedIn"
+          />
         </div>
       </motion.div>
     </section>
