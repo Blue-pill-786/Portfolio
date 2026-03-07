@@ -1,18 +1,25 @@
 import { useState } from "react";
-import {
-  FaBars,
-  FaXmark,
-  FaMoon,
-  FaSun,
-} from "react-icons/fa6";
+import { FaBars, FaXmark, FaMoon, FaSun } from "react-icons/fa6";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [dark, setDark] = useState(true);
+  const [dark, setDark] = useState(
+    document.documentElement.classList.contains("dark")
+  );
 
   const toggleTheme = () => {
     document.documentElement.classList.toggle("dark");
     setDark(!dark);
+  };
+
+  const openMenu = () => {
+    document.body.style.overflow = "hidden";
+    setOpen(true);
+  };
+
+  const closeMenu = () => {
+    document.body.style.overflow = "auto";
+    setOpen(false);
   };
 
   return (
@@ -28,19 +35,20 @@ export default function Navbar() {
           </button>
         </div>
 
-        <button className="md:hidden" onClick={() => setOpen(true)}>
+        <button className="md:hidden" onClick={openMenu}>
           <FaBars size={22} />
         </button>
       </div>
 
-      {/* Mobile Menu */}
       {open && (
-        <div className="fixed inset-0 bg-cyan/80 backdrop-blur flex flex-col items-center justify-center gap-8 text-xl">
-          <button onClick={() => setOpen(false)} className="absolute top-4 right-6">
-  <FaXmark size={26} />
-</button>
-          <a href="#projects" onClick={() => setOpen(false)}>Projects</a>
-          <a href="#contact" onClick={() => setOpen(false)}>Contact</a>
+        <div className="fixed inset-0 bg-black/80 backdrop-blur flex flex-col items-center justify-center gap-8 text-xl">
+          <button onClick={closeMenu} className="absolute top-4 right-6">
+            <FaXmark size={26} />
+          </button>
+
+          <a href="#projects" onClick={closeMenu}>Projects</a>
+          <a href="#contact" onClick={closeMenu}>Contact</a>
+
           <button onClick={toggleTheme}>
             {dark ? <FaSun /> : <FaMoon />}
           </button>
